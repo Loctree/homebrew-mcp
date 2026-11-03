@@ -1,34 +1,36 @@
 class LoctMcp < Formula
   desc "MCP server for loct structural analysis"
   homepage "https://loct.io"
-  version "0.14.5"
   license "BUSL-1.1"
 
+  # 0.15.1 is not on GitHub Releases (those stop at v0.14.5). The installer
+  # and loctree.com publish one combined bundle per target; this formula
+  # still installs only the loctree-mcp server from that bundle.
   on_macos do
     on_arm do
-      url "https://github.com/Loctree/loctree-mcp/releases/download/v0.14.5/loct-mcp-darwin-aarch64.tar.gz"
-      sha256 "d8fe86e366db1c8a241bb7985dc11df8019f18956357d899e2aeeaf86791df0c"
+      url "https://loctree.com/releases/0.15.1/loctree-0.15.1-gc56718c7930a-aarch64-apple-darwin.tar.gz"
+      sha256 "1b8f346de5063df0d9d01104b1ae7e15277c040b965f0fe5919b5f35c0f19e2c"
     end
 
     on_intel do
-      url "https://github.com/Loctree/loctree-mcp/releases/download/v0.14.5/loct-mcp-darwin-x86_64.tar.gz"
-      sha256 "2a117f7a1a8ba9b3967519734d4ea77e855a810ebbd06a69387d940c0709877a"
+      url "https://loctree.com/releases/0.15.1/loctree-0.15.1-gc56718c7930a-x86_64-apple-darwin.tar.gz"
+      sha256 "b2ebeafd4ed280b8347529bfa3630e2947cdb6ba956dc98205546dac19bd8193"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/Loctree/loctree-mcp/releases/download/v0.14.5/loct-mcp-linux-x86_64.tar.gz"
-      sha256 "56d2a0d8e29dc18e1a4fa7e320349be779c5d1891a25b09735137afba5f032f1"
+      url "https://loctree.com/releases/0.15.1/loctree-0.15.1-gc56718c7930a-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "c059e60cd41acb273a608cfe62bf8f4acd14c57d84fe31a89cf1e6facacfeaf8"
     end
   end
 
   def install
-    bin.install "loct-mcp"
+    bin.install "bin/loctree-mcp"
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/loct-mcp --version")
-    assert_match "Usage", shell_output("#{bin}/loct-mcp --help")
+    assert_match version.to_s, shell_output("#{bin}/loctree-mcp --version")
+    assert_match "Usage", shell_output("#{bin}/loctree-mcp --help")
   end
 end
